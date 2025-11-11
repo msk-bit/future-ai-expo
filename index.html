@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>ذكاء المستقبل: من فكرة إلى خوارزمية</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- خط Google (يمكن استبداله محليًا إذا لزم الأمر) -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-main: #ffffff;
+            --primary: #11c0d8;          /* فيروزي */
+            --primary-alt: #21a4ff;      /* أزرق سماوي */
+            --dark-blue: #0b2340;        /* أزرق غامق للنصوص */
+            --light-gray: #f3f5f9;       /* رمادي فاتح */
+            --text-gray: #6b6f7a;
+            --purple-soft: #c9a7ff;
+            --green-emerald: #26b58f;
+            --metal-gray: #9aa4b5;
+            --accessible-color: #ff9f43; /* للمحور المشترك (ذوي الهمم) */
+            --radius: 14px;
+            --transition-fast: 0.25s ease;
+            --shadow-soft: 0 8px 22px rgba(15, 23, 42, 0.10);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Tajawal', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-main);
+            color: var(--dark-blue);
+            scroll-behavior: smooth;
+        }
+
+        body {
+            padding-top: 72px; /* مساحة تحت شريط التنقل الثابت */
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* شريط التنقل */
+
+        header {
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 0;
+            background: linear-gradient(to left, var(--primary), var(--primary-alt));
+            box-shadow: 0 4px 14px rgba(15, 23, 42, 0.16);
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 10px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            color: #ffffff;
+        }
+
+        .nav-title {
+            font-weight: 700;
+            font-size: 16px;
+            white-space: nowrap;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .nav-links a {
+            padding: 6px 10px;
+            border-radius: 999px;
+            transition: background-color var(--transition-fast), transform var(--transition-fast);
+            font-weight: 400;
+            opacity: 0.95;
+        }
+
+        .nav-links a:hover {
+            background-color: rgba(255, 255, 255, 0.14);
+            transform: translateY(-1px);
+        }
+
+        /* زر قائمة للجوال */
+
+        .nav-toggle {
+            display: none;
+            cursor: pointer;
+            font-size: 20px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.7);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 60px;
+                right: 12px;
+                left: 12px;
+                flex-direction: column;
+                align-items: stretch;
+                background-color: #ffffff;
+                color: var(--dark-blue);
+                padding: 10px;
+                border-radius: 16px;
+                box-shadow: var(--shadow-soft);
+                display: none;
+            }
+
+            .nav-links a {
+                padding: 10px;
+                border-radius: 10px;
+                background-color: var(--light-gray);
+            }
+
+            .nav-toggle {
+                display: block;
+            }
+
+            .nav-container {
+                justify-content: space-between;
+            }
+        }
+
+        /* أقسام عامة */
+
+        section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 16px 24px;
+        }
+
+        section h2 {
+            font-size: 24px;
+            margin-bottom: 12px;
+            color: var(--dark-blue);
+        }
+
+        section p {
+            font-size: 15px;
+            color: var(--text-gray);
+            line-height: 1.8;
+        }
+
+        /* قسم الرئيسية (Hero) */
+
+        .hero {
+            display: grid;
+            grid-template-columns: minmax(0, 3fr) minmax(200px, 2fr);
+            gap: 28px;
+            align-items: center;
+        }
+
+        .hero-title {
+            font-size: 30px;
+            font-weight: 800;
+            margin: 0 0 12px;
+            color: var(--dark-blue);
+        }
+
+        .hero-subtitle {
+            font-size: 16px;
+            color: var(--text-gray);
+            margin-bottom: 18px;
+        }
+
+        .hero-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 999px;
+            background: linear-gradient(to left, var(--primary), var(--primary-alt));
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: 600;
+            box-shadow: var(--shadow-soft);
+            cursor: pointer;
+            border: none;
+            transition: transform var(--transition-fast), box-shadow var(--transition-fast), opacity var(--transition-fast);
+        }
+
+        .hero-btn span {
+            font-size: 17px;
+        }
+
+        .hero-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 24px rgba(15, 23, 42, 0.18);
+            opacity: 0.96;
+        }
+
+        .hero-logo-placeholder {
+            border-radius: 18px;
+            border: 1.5px dashed var(--primary-alt);
+            padding: 18px;
+            text-align: center;
+            background: radial-gradient(circle at top left, rgba(33,164,255,0.08), transparent);
+        }
+
+        .hero-logo-placeholder span {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--dark-blue);
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .hero-logo-placeholder small {
+            font-size: 12px;
+            color: var(--text-gray);
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+            .hero-title {
+                font-size: 24px;
+            }
+        }
+
+        /* قسم المحاور والمشاريع */
+
+        .themes-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0,1fr));
+            gap: 16px;
+        }
+
+        @media (max-width: 768px) {
+            .themes-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .theme-card {
+            background-color: var(--light-gray);
+            border-radius: var(--radius);
+            padding: 14px 14px 10px;
+            box-shadow: var(--shadow-soft);
+            position: relative;
+            overflow: hidden;
+            transition: transform var(--transition-fast), box-shadow var(--transition-fast), border var(--transition-fast);
+            cursor: default;
+        }
+
+        .theme-label {
+            font-size: 12px;
+            color: var(--text-gray);
+            margin-bottom: 4px;
+        }
+
+        .theme-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .projects-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .project-pill {
+            background-color: #ffffff;
+            padding: 7px 9px;
+            border-radius: 999px;
+            font-size: 12px;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
+            position: relative;
+            transition: all var(--transition-fast);
+        }
+
+        .project-pill span {
+            font-weight: 600;
+            color: var(--dark-blue);
+        }
+
+        .project-desc {
+            font-size: 11px;
+            color: var(--text-gray);
+            margin-top: 4px;
+            display: none;
+        }
+
+        .project-pill:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(15, 23, 42, 0.14);
+        }
+
+        .project-pill.active .project-desc {
+            display: block;
+        }
+
+        /* ألوان خاصة لكل محور */
+
+        .theme-1 { border-right: 4px solid #7bd3ff; }
+        .theme-2 { border-right: 4px solid var(--purple-soft); }
+        .theme-3 { border-right: 4px solid var(--green-emerald); }
+        .theme-4 { border-right: 4px solid var(--metal-gray); }
+        .theme-5 { border-right: 4px solid var(--accessible-color); }
+
+        .theme-1 .project-pill { border: 1px solid #d6efff; }
+        .theme-2 .project-pill { border: 1px solid #e6d8ff; }
+        .theme-3 .project-pill { border: 1px solid #d4f4ea; }
+        .theme-4 .project-pill { border: 1px solid #dfe5ee; }
+        .theme-5 .project-pill { border: 1px solid #ffe3bf; }
+
+        /* قسم فكرة مشروعك */
+
+        .idea-box {
+            margin-top: 12px;
+            background: linear-gradient(to left, rgba(17,192,216,0.06), rgba(33,164,255,0.04));
+            border-radius: var(--radius);
+            padding: 18px 16px;
+            border: 1px solid rgba(17,192,216,0.18);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .idea-box h3 {
+            margin: 0 0 8px;
+            font-size: 18px;
+            color: var(--dark-blue);
+        }
+
+        .idea-box p {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        /* قسم الأدوات والمنصات */
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0,1fr));
+            gap: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .tool-card {
+            background-color: var(--light-gray);
+            border-radius: var(--radius);
+            padding: 12px 12px 10px;
+            box-shadow: var(--shadow-soft);
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            transition: transform var(--transition-fast), box-shadow var(--transition-fast), border var(--transition-fast);
+        }
+
+        .tool-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 22px rgba(15,23,42,0.16);
+            border: 1px solid var(--primary-alt);
+        }
+
+        .tool-name {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--dark-blue);
+        }
+
+        .tool-link {
+            font-size: 11px;
+            color: var(--primary-alt);
+            word-break: break-all;
+        }
+
+        .tool-desc {
+            font-size: 12px;
+            color: var(--text-gray);
+        }
+
+        /* قسم الجدول الزمني */
+
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 12px;
+            font-size: 13px;
+            box-shadow: var(--shadow-soft);
+            border-radius: var(--radius);
+            overflow: hidden;
+        }
+
+        .schedule-table th,
+        .schedule-table td {
+            padding: 10px;
+            text-align: right;
+            border-bottom: 1px solid #e5e7eb;
+            background-color: #ffffff;
+        }
+
+        .schedule-table th {
+            background-color: var(--light-gray);
+            font-weight: 700;
+            color: var(--dark-blue);
+        }
+
+        .row-1 { background-color: rgba(123,211,255,0.16); }
+        .row-2 { background-color: rgba(201,167,255,0.16); }
+        .row-3 { background-color: rgba(38,181,143,0.16); }
+        .row-4 { background-color: rgba(154,164,181,0.16); }
+
+        /* قسم التقييم */
+
+        .evaluation-wrapper {
+            display: grid;
+            grid-template-columns: minmax(0,2.2fr) minmax(0,1.4fr);
+            gap: 20px;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .evaluation-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .evaluation-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .evaluation-item {
+            background-color: var(--light-gray);
+            border-radius: 999px;
+            padding: 8px 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px;
+        }
+
+        .evaluation-label {
+            font-weight: 500;
+        }
+
+        .evaluation-score {
+            font-weight: 700;
+            color: var(--primary-alt);
+        }
+
+        .circle-total {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 8px solid rgba(17,192,216,0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            position: relative;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .circle-total::before {
+            content: "";
+            position: absolute;
+            inset: 8px;
+            border-radius: 50%;
+            border: 5px solid var(--primary-alt);
+            border-top-color: transparent;
+            border-left-color: var(--primary);
+            transform: rotate(-40deg);
+        }
+
+        .circle-total span {
+            position: relative;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--dark-blue);
+            text-align: center;
+        }
+
+        /* قسم الخاتمة */
+
+        .conclusion-box {
+            background-color: var(--light-gray);
+            border-radius: var(--radius);
+            padding: 16px 14px;
+            box-shadow: var(--shadow-soft);
+            font-size: 14px;
+            line-height: 1.9;
+        }
+
+        /* التذييل */
+
+        footer {
+            text-align: center;
+            padding: 18px 10px 22px;
+            font-size: 12px;
+            color: var(--text-gray);
+            background-color: #ffffff;
+            border-top: 1px solid #edf0f4;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="nav-container">
+        <div class="nav-title">
+            ذكاء المستقبل: من فكرة إلى خوارزمية
+        </div>
+        <div class="nav-toggle" id="navToggle">☰</div>
+        <nav class="nav-links" id="navLinks">
+            <a href="#hero">الرئيسية</a>
+            <a href="#themes">المحاور</a>
+            <a href="#tools">الأدوات والمنصات</a>
+            <a href="#schedule">الجدول الزمني</a>
+            <a href="#evaluation">التقييم</a>
+            <a href="#conclusion">الخاتمة</a>
+        </nav>
+    </div>
+</header>
+
+<!-- الرئيسية -->
+<section id="hero">
+    <div class="hero">
+        <div>
+            <h1 class="hero-title">ذكاء المستقبل: من فكرة إلى خوارزمية</h1>
+            <p class="hero-subtitle">
+                معرض مشاريع الذكاء الاصطناعي لطالبات الصف الأول الثانوي – الثانوية 124
+                <br>
+                بإشراف المعلمة مشاعل الخليفة.
+            </p>
+            <button class="hero-btn" onclick="scrollToSection('themes')">
+                استكشفي المحاور
+                <span>↧</span>
+            </button>
+        </div>
+<div style="
+    text-align: center;
+    padding: 20px 0;
+">
+    <img src="Artificial_Intelligence_Fair_Logo.png.png" 
+         alt="شعار معرض ذكاء المستقبل"
+         style="width: 240px; height: auto; display: inline-block;">
+</div>
+
+    </div>
+</section>
+
+<!-- المحاور والمشاريع -->
+<section id="themes">
+    <h2>المحاور والمشاريع</h2>
+    <p>
+        تتوزع مشاريع طالبات الصف الأول الثانوي على أربعة محاور رئيسية، بالإضافة إلى محور مشترك يخدم ذوي الهمم.
+        اضغطي على اسم المشروع لإظهار وصفه المختصر.
+    </p>
+
+    <div class="themes-grid">
+
+        <!-- أولى 1 -->
+        <div class="theme-card theme-1">
+            <div class="theme-label">فصل أولى 1</div>
+            <div class="theme-title">ذكاء يخدم الإنسانية</div>
+            <div class="projects-list">
+                <div class="project-pill" data-desc="منصة مساعدة طبية ذكية تدعم الأطباء في تحليل الأعراض المبكرة وتوجيه المرضى لطلب المساعدة في الوقت المناسب.">
+                    <span>HealBot</span>
+                    <div class="project-desc"></div>
+                </div>
+                <div class="project-pill" data-desc="تطبيق يحول رسائل الدعم الإيجابية إلى صوت مهدّئ، مخصص لكبار السن والمرضى والأطفال في المستشفيات.">
+                    <span>Voice of Kindness</span>
+                    <div class="project-desc"></div>
+                </div>
+                <div class="project-pill" data-desc="نظام ربط بين المتبرعين والجهات الخيرية باستخدام الذكاء الاصطناعي لمطابقة الاحتياج مع الموارد المتاحة بدقة.">
+                    <span>CareLink</span>
+                    <div class="project-desc"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- أولى 2 -->
+        <div class="theme-card theme-2">
+            <div class="theme-label">فصل أولى 2</div>
+            <div class="theme-title">ذكاء آمن للأجيال</div>
+            <div class="projects-list">
+                <div class="project-pill" data-desc="أداة ذكية ترصد المواقع المشبوهة والمحتوى غير المناسب وتقترح بدائل آمنة للطلاب.">
+                    <span>SafeWeb</span>
+                    <div class="project-desc"></div>
+                </div>
+                <div class="project-pill" data-desc="مساعد افتراضي للأهالي لمراقبة استخدام الأبناء للتقنية والتنبيه عند السلوك الرقمي الخطر.">
+                    <span>AI Guardian</span>
+                    <div class="project-desc"></div>
+                </div>
+                <div class="project-pill" data-desc="منصة توازن رقمي تقترح جدولًا صحيًا بين الدراسة، الشاشة، والنشاط البدني بناءً على سلوك المستخدم.">
+                    <span>Digital Balance</span>
+                    <div class="project-desc"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- أولى 3 -->
+        <div class="theme-card theme-3">
+            <div class="theme-label">فصل أولى 3</div>
+            <div class="theme-title">ذكاء يبتكر الحلول</div>
+            <div class="projects-list">
+                <div class="project-pill" data-desc="نظام رؤية حاسوبية لفرز النفايات واقتراح أفضل طرق إعادة التدوير في المدارس والأحياء.">
+                    <span>RecycleVision</span>
+                    <div class="project-desc"></div>
+                </div>
+                <div class="project-pill" data-desc="مساعد ذكي ينظم جداول الطالبات تلقائيًا بحسب الواجبات، الاختبارات، والهوايات.">
+                    <span>SmartSchedule</span>
+                    <div class="project-desc"></div>
+                </div>
+                <div class="project-pill" data-desc="تطبيق يتابع عادات النوم، الماء، والحركة ويقترح تنبيهات صحية مخصصة باستخدام الذكاء الاصطناعي.">
+                    <span>HealthTrack</span>
+                    <div class="project-desc"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- أولى 4 -->
+        <div class="theme-card theme-4">
+            <div class="theme-label">فصل أولى 4</div>
+            <div class="theme-title">ذكاء من أجل المستقبل</div>
+            <div class="projects-list">
+                <div class="project-pill" data-desc="عربة استكشاف ذاتية القيادة مدعومة بذكاء اصطناعي لجمع البيانات في البيئات الصعبة.">
+                    <span>Future Rover</span>
+                    <div class="project-desc"></div>
+                </div>
+                <div class="project-pill" data-desc="بيئة تعليم افتراضية 2050 تحاكي الفصول المستقبلية التفاعلية باستخدام الواقع المعزز والذكاء الاصطناعي.">
+                    <span>Virtual Classroom 2050</span>
+                    <div class="project-desc"></div>
+                </div>
+                <div class="project-pill" data-desc="مخطط ذكي يساعد الطالبات على رسم مسار أحلامهن المهنية بناءً على قدراتهن وميولهن.">
+                    <span>AI Dream Planner</span>
+                    <div class="project-desc"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- المحور المشترك -->
+        <div class="theme-card theme-5" style="grid-column: 1 / -1;">
+            <div class="theme-label">محور مشترك</div>
+            <div class="theme-title">ذكاء يخدم ذوي الهمم</div>
+            <p style="font-size:12px; color:var(--text-gray); margin:0 0 6px;">
+                أربعة مشاريع تمثل فصول أولى 1–4، تركز على تمكين ذوي الهمم من خلال حلول تقنية مساندة.
+            </p>
+            <div class="projects-list">
+                <div class="project-pill" data-desc="جهاز وتطبيق لتحويل الكلام إلى نص واضح فوري لمساندة ضعاف السمع في الصفوف.">
+                    <span>HearMe – أولى 1</span>
+                    <div class="project-desc"></div>
+                </div>
+                <div class="project-pill" data-desc="مساعد صوتي مبسط يدعم من لديهم صعوبات نطق للتواصل بثقة في المدرسة والمنزل.">
+                    <span>SpeakAI – أولى 2</span>
+                    <div class="project-desc"></div>
+                </div>
+                <div class="project-pill" data-desc="خريطة ذكية داخلية ترشد مستخدمي الكراسي المتحركة في المباني التعليمية بسهولة.">
+                    <span>GuideMe – أولى 3</span>
+                    <div class="project-desc"></div>
+                </div>
+                <div class="project-pill" data-desc="نظارة مزودة برؤية حاسوبية تقرأ اللوحات وتساعد فاقدي البصر في الحركة الآمنة.">
+                    <span>VisionFriend – أولى 4</span>
+                    <div class="project-desc"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- فكرة مشروعك -->
+    <div class="idea-box">
+        <h3>فكرة مشروعك 👇</h3>
+        <p>
+            فكّري في مشكلة حقيقية تواجه الإنسان اليوم ضمن محورك:
+            في الصحة، التعليم، البيئة، الأمن الرقمي، أو دعم ذوي الهمم.
+            اكتبي كيف يمكن للذكاء الاصطناعي أن يساعد في حلّها بشكل مسؤول وواقعي.
+            <br>
+            هل فكرّتِ في الأطفال؟ في البيئة؟ في تعليم البنات؟ في صحة المجتمع؟
+            كل فكرة ناجحة تبدأ من احتياج واضح، ثم تتحول إلى نموذج، ثم إلى خوارزمية تخدم الإنسان.
+        </p>
+    </div>
+</section>
+
+<!-- الأدوات والمنصات -->
+<section id="tools">
+    <h2>الأدوات والمنصات المقترحة</h2>
+    <p>
+        هذه مجموعة من الأدوات والمنصات التي يمكن للطالبات استخدامها لتصميم نماذج أولية، روبوتات محادثة،
+        تطبيقات بسيطة، وعروض تفاعلية لمشاريع الذكاء الاصطناعي.
+    </p>
+
+    <div class="tools-grid">
+        <div class="tool-card">
+            <div class="tool-name">Google Teachable Machine</div>
+            <a class="tool-link" href="https://teachablemachine.withgoogle.com" target="_blank">teachablemachine.withgoogle.com</a>
+            <div class="tool-desc">منصة سهلة لتدريب نماذج تصنيف صور أو أصوات أو حركات بدون برمجة، مناسبة للمشاريع المدرسية.</div>
+        </div>
+        <div class="tool-card">
+            <div class="tool-name">Microsoft Lobe</div>
+            <a class="tool-link" href="https://www.lobe.ai" target="_blank">lobe.ai</a>
+            <div class="tool-desc">تطبيق بصري لتدريب نماذج رؤية حاسوبية وسهلة التصدير للتطبيقات والأجهزة.</div>
+        </div>
+        <div class="tool-card">
+            <div class="tool-name">IBM watsonx</div>
+            <a class="tool-link" href="https://www.ibm.com/watsonx" target="_blank">ibm.com/watsonx</a>
+            <div class="tool-desc">مجموعة أدوات لبناء حلول ذكية على مستوى احترافي، يمكن استلهام أفكار المشاريع منها.</div>
+        </div>
+        <div class="tool-card">
+            <div class="tool-name">Dialogflow</div>
+            <a class="tool-link" href="https://dialogflow.cloud.google.com" target="_blank">dialogflow.cloud.google.com</a>
+            <div class="tool-desc">منصة من Google لبناء روبوتات محادثة ذكية باللغة الطبيعية لمواقع الويب والتطبيقات.</div>
+        </div>
+        <div class="tool-card">
+            <div class="tool-name">Landbot</div>
+            <a class="tool-link" href="https://landbot.io" target="_blank">landbot.io</a>
+            <div class="tool-desc">أداة لإنشاء روبوتات محادثة تفاعلية بواجهة سحب وإفلات دون تعقيد برمجي.</div>
+        </div>
+        <div class="tool-card">
+            <div class="tool-name">Botpress Cloud</div>
+            <a class="tool-link" href="https://botpress.com" target="_blank">botpress.com</a>
+            <div class="tool-desc">منصة مفتوحة المصدر لبناء مساعدين أذكياء يمكن توظيفها في مشاريع خدمة المجتمع.</div>
+        </div>
+        <div class="tool-card">
+            <div class="tool-name">MIT App Inventor</div>
+            <a class="tool-link" href="https://appinventor.mit.edu" target="_blank">appinventor.mit.edu</a>
+            <div class="tool-desc">بيئة تطوير مرئية لإنشاء تطبيقات أندرويد تعليمية بسيطة تعتمد على كتل برمجية.</div>
+        </div>
+        <div class="tool-card">
+            <div class="tool-name">Thunkable</div>
+            <a class="tool-link" href="https://thunkable.com" target="_blank">thunkable.com</a>
+            <div class="tool-desc">منصة لبناء تطبيقات جوال متعددة الأنظمة بواجهة مرئية ودعم لتكاملات ذكية.</div>
+        </div>
+        <div class="tool-card">
+            <div class="tool-name">Canva Magic Studio</div>
+            <a class="tool-link" href="https://www.canva.com" target="_blank">canva.com</a>
+            <div class="tool-desc">أدوات تصميم مدعومة بالذكاء الاصطناعي لإنشاء عروض تقديمية، شعارات، ومواد بصرية للمشاريع.</div>
+        </div>
+        <div class="tool-card">
+            <div class="tool-name">Gamma.app</div>
+            <a class="tool-link" href="https://gamma.app" target="_blank">gamma.app</a>
+            <div class="tool-desc">منصة لإنشاء عروض تقديمية تفاعلية مدعومة بالذكاء الاصطناعي تساعد على عرض المشروع بشكل احترافي.</div>
+        </div>
+    </div>
+</section>
+
+<!-- الجدول الزمني -->
+<section id="schedule">
+    <h2>الجدول الزمني للعرض</h2>
+    <p>
+        يقام المعرض في الأسبوع الرابع عشر من الفصل الدراسي الأول، خلال الحصتين الأخيرتين من يوم الأحد إلى الأربعاء،
+        وفق الترتيب التالي:
+    </p>
+
+    <table class="schedule-table">
+        <thead>
+        <tr>
+            <th>اليوم</th>
+            <th>وقت العرض</th>
+            <th>الفصل والمحور</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="row-1">
+            <td>الأحد</td>
+            <td>الحصتان الأخيرتان</td>
+            <td>أولى 1 – ذكاء يخدم الإنسانية</td>
+        </tr>
+        <tr class="row-2">
+            <td>الاثنين</td>
+            <td>الحصتان الأخيرتان</td>
+            <td>أولى 2 – ذكاء آمن للأجيال</td>
+        </tr>
+        <tr class="row-3">
+            <td>الثلاثاء</td>
+            <td>الحصتان الأخيرتان</td>
+            <td>أولى 3 – ذكاء يبتكر الحلول</td>
+        </tr>
+        <tr class="row-4">
+            <td>الأربعاء</td>
+            <td>الحصتان الأخيرتان</td>
+            <td>أولى 4 – ذكاء من أجل المستقبل</td>
+        </tr>
+        </tbody>
+    </table>
+</section>
+
+<!-- التقييم -->
+<section id="evaluation">
+    <h2>معايير التقييم</h2>
+    <p>
+        يُقيَّم كل مشروع وفق معايير واضحة تشجع على الابتكار، التوظيف التقني المسؤول، والعمل الجماعي.
+        مجموع الدرجات: <strong>40 درجة</strong>.
+    </p>
+
+    <div class="evaluation-wrapper">
+        <ul class="evaluation-list">
+            <li class="evaluation-item">
+                <div class="evaluation-label">الفكرة والابتكار</div>
+                <div class="evaluation-score">10 درجات</div>
+            </li>
+            <li class="evaluation-item">
+                <div class="evaluation-label">التوظيف التقني للذكاء الاصطناعي</div>
+                <div class="evaluation-score">10 درجات</div>
+            </li>
+            <li class="evaluation-item">
+                <div class="evaluation-label">العرض والتقديم</div>
+                <div class="evaluation-score">8 درجات</div>
+            </li>
+            <li class="evaluation-item">
+                <div class="evaluation-label">العمل الجماعي والتنظيم</div>
+                <div class="evaluation-score">6 درجات</div>
+            </li>
+            <li class="evaluation-item">
+                <div class="evaluation-label">الأثر والفائدة المجتمعية</div>
+                <div class="evaluation-score">6 درجات</div>
+            </li>
+        </ul>
+        <div class="circle-total">
+            <span>إجمالي التقييم<br>40 درجة</span>
+        </div>
+    </div>
+</section>
+
+<!-- الخاتمة -->
+<section id="conclusion">
+    <h2>الخاتمة</h2>
+    <div class="conclusion-box">
+        يأتي معرض «ذكاء المستقبل: من فكرة إلى خوارزمية» امتدادًا لجهود الثانوية 124
+        في دعم التحول الرقمي وتعزيز الكفاءات الوطنية في مجال الذكاء الاصطناعي.
+        ما تقدمه طالبات الصف الأول الثانوي من مشاريع ابتكارية واقعية
+        يمثّل خطوة عملية نحو جيل واعٍ تقنيًا، قادر على التفكير الخوارزمي،
+        والابتكار المسؤول، والمساهمة الفاعلة في صناعة مستقبل المملكة الذكي.
+    </div>
+</section>
+
+<!-- التذييل -->
+<footer>
+    الثانوية 124 – إشراف المعلمة مشاعل الخليفة © 2025
+</footer>
+
+<script>
+    // فتح/إغلاق قائمة الجوال
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    navToggle.addEventListener('click', () => {
+        if (navLinks.style.display === 'flex') {
+            navLinks.style.display = 'none';
+        } else {
+            navLinks.style.display = 'flex';
+        }
+    });
+
+    // إغلاق القائمة بعد الضغط على رابط (في الجوال)
+    Array.from(navLinks.querySelectorAll('a')).forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth <= 768) {
+                navLinks.style.display = 'none';
+            }
+        });
+    });
+
+    // تمرير ناعم إلى قسم معين
+    function scrollToSection(id) {
+        const el = document.getElementById(id);
+        if (el) {
+            el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }
+
+    // تفعيل وصف المشروع عند النقر (للموبايل والويب)
+    const projectPills = document.querySelectorAll('.project-pill');
+
+    projectPills.forEach(pill => {
+        const descText = pill.getAttribute('data-desc');
+        const descDiv = pill.querySelector('.project-desc');
+        if (descText && descDiv) {
+            descDiv.textContent = descText;
+        }
+
+        pill.addEventListener('click', () => {
+            // في كل محور، يمكن فتح/إغلاق الوصف
+            pill.classList.toggle('active');
+        });
+
+        // إظهار تلميح بسيط عند المرور (اختياري - يعتمد على CSS أيضاً)
+        pill.addEventListener('mouseenter', () => {
+            pill.classList.add('hovered');
+        });
+        pill.addEventListener('mouseleave', () => {
+            pill.classList.remove('hovered');
+        });
+    });
+</script>
+
+</body>
+</html>
