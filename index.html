@@ -161,16 +161,123 @@
       .card,.theme-card,.tool-card{padding:16px}
       .idea-box{padding:22px}
     }
+    /* الأدوار والمهام */
+.roles-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+@media(max-width:768px){.roles-grid{grid-template-columns:1fr}}
+.role-card{background:#fff;border-radius:18px;box-shadow:0 10px 26px rgba(15,23,42,.10);padding:16px;transition:transform .25s ease,box-shadow .25s ease}
+.role-card:hover{transform:translateY(-2px);box-shadow:0 16px 32px rgba(15,23,42,.18)}
+.role-title{margin:0 0 8px;font-weight:800;font-size:18px}
+.role-badge{display:inline-block;margin-bottom:8px;padding:6px 10px;border-radius:999px;background:#f5f7fb;border:1px solid #e9edf3;font-size:12px}
+.role-sub{margin:0 0 6px;font-weight:700;font-size:14px}
+.role-list{margin:0 0 10px;padding-inline-start:18px;color:#6b6f7a;font-size:14px;line-height:1.8}
+/* الأدوار والمهام */
+.roles-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+@media (max-width: 768px) {
+  .roles-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.role-card {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 10px 26px rgba(15, 23, 42, 0.1);
+  padding: 18px 16px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  border-top: 6px solid transparent;
+}
+.role-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 32px rgba(15, 23, 42, 0.15);
+}
+.role-title {
+  margin: 0 0 6px;
+  font-weight: 800;
+  font-size: 18px;
+}
+.role-badge {
+  display: inline-block;
+  margin-bottom: 10px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: #f5f7fb;
+  border: 1px solid #e9edf3;
+  font-size: 12px;
+  font-weight: 500;
+}
+.role-sub {
+  margin: 0 0 4px;
+  font-weight: 700;
+  font-size: 14px;
+}
+.role-list {
+  margin: 0 0 10px;
+  padding-inline-start: 18px;
+  color: #6b6f7a;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+/* ألوان خاصة لكل دور */
+.role-leader {
+  border-top-color: #1E3A8A;
+}
+.role-leader .role-title {
+  color: #1E3A8A;
+}
+.role-programmer {
+  border-top-color: #6D28D9;
+}
+.role-programmer .role-title {
+  color: #6D28D9;
+}
+.role-designer {
+  border-top-color: #059669;
+}
+.role-designer .role-title {
+  color: #059669;
+}
+.role-researcher {
+  border-top-color: #6B7280;
+}
+.role-researcher .role-title {
+  color: #6B7280;
+}
+.role-speaker {
+  border-top-color: #BE185D;
+}
+.role-speaker .role-title {
+  color: #BE185D;
+}
+.role-media {
+  border-top-color: #0284C7;
+}
+.role-media .role-title {
+  color: #0284C7;
+}
+.role-tech {
+  border-top-color: #EA580C;
+}
+.role-tech .role-title {
+  color: #EA580C;
+}
+
   </style>
 
   <!-- Social cards -->
-  <meta property="og:title" content="ذكاء المستقبل: من فكرة إلى خوارزمية">
-  <meta property="og:description" content="معرض مشاريع الذكاء الاصطناعي لطالبات الصف الأول الثانوي – الثانوية 124 بإشراف المعلمة مشاعل الخليفة.">
-  <meta property="og:image" content="Artificial_Intelligence_Fair_Logo.png">
-  <meta property="og:type" content="website">
-  <meta name="twitter:card" content="summary_large_image">
-  <link rel="icon" type="image/png" href="favicon.png" />
-  <meta name="theme-color" content="#11c0d8" />
+<meta property="og:title" content="ذكاء المستقبل: من فكرة إلى خوارزمية">
+<meta property="og:description" content="معرض مشاريع الذكاء الاصطناعي لطالبات الصف الأول الثانوي - الثانوية 124 بإشراف المعلمة مشاعل الخليفة.">
+<meta property="og:url" content="https://msk-bit.github.io/future-ai-expo/">
+<meta property="og:image" content="https://msk-bit.github.io/future-ai-expo/cover.png">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ذكاء المستقبل: من فكرة إلى خوارزمية">
+<meta name="twitter:description" content="معرض مشاريع الذكاء الاصطناعي لطالبات الصف الأول الثانوي - الثانوية 124.">
+<meta name="twitter:image" content="https://msk-bit.github.io/future-ai-expo/cover.png">
+
 </head>
 <body>
 
@@ -217,7 +324,7 @@
         <div class="theme-title">ذكاء يخدم الإنسانية</div>
         <div class="projects-list">
           <div class="project-pill" data-desc="منصة مساعدة طبية ذكية تدعم الأطباء في تحليل الأعراض المبكرة وتوجيه المرضى لطلب المساعدة في الوقت المناسب."><span>HealBot</span><div class="project-desc"></div></div>
-          <div class="project-pill" data-desc="أداة تحوّل رسائل الدعم الايجابية إلى صوت مهدّئ لكبار السن والمرضى والأطفال في المستشفيات."><span>Voice of Kindness</span><div class="project-desc"></div></div>
+          <div class="project-pill" data-desc="أداة تحوّل رسائل الدعم إلى صوت مهدّئ لكبار السن والمرضى والأطفال في المستشفيات."><span>Voice of Kindness</span><div class="project-desc"></div></div>
           <div class="project-pill" data-desc="نظام ربط ذكي بين المتبرعين واحتياجات الجمعيات باستخدام الذكاء الاصطناعي لمطابقة الاحتياج مع الموارد المتاحة بدقة."><span>CareLink</span><div class="project-desc"></div></div>
         </div>
       </div>
@@ -274,21 +381,178 @@
         كل فكرة ناجحة تبدأ من احتياج واضح، ثم تتحول إلى نموذج، ثم إلى خوارزمية تخدم الإنسان
       </p>
     </div>
+    </div><!-- نهاية .idea-box -->
+
+</section><!-- نهاية قسم المحاور إن رغبتِ -->
+
+<!-- الأدوار والمهام -->
+<section id="roles">
+  <h2>الأدوار والمهام</h2>
+  <p>وزِّعن الأدوار بوضوح منذ البداية؛ كل دور مسؤول عن مخرجات محددة، ويعكس وظيفة حقيقية في سوق العمل. التوزيع العادل يقلّل التعارض ويرفع جودة المشروع.</p>
+
+ <div class="roles-grid">
+  <div class="role-card role-leader"> <!-- قائدة -->
+    <div class="role-title">قائدة الفريق</div>
+    <div class="role-badge">المسمّى المستقبلي: Product Manager / Team Lead</div>
+    <p class="role-sub">الصفات والمهارات</p>
+    <ul class="role-list">
+      <li>اتخاذ القرار، تنظيم الوقت، تحفيز الفريق، إدارة المخاطر.</li>
+      <li>تصميم خطة العمل، متابعة التنفيذ، مهارات تواصل عالية.</li>
+    </ul>
+    <p class="role-sub">المهام المطلوبة</p>
+    <ul class="role-list">
+      <li>تحديد الهدف، تقسيم المهام، وضع الجدول الزمني وسجل المخاطر.</li>
+      <li>تنسيق العرض النهائي، ضمان اكتمال المتطلبات وتسليمها.</li>
+    </ul>
+  </div>
+
+  <div class="role-card role-programmer"> <!-- مبرمجة -->
+    <div class="role-title">المبرمجة</div>
+    <div class="role-badge">المسمّى المستقبلي: Software / ML Engineer</div>
+    <p class="role-sub">الصفات والمهارات</p>
+    <ul class="role-list">
+      <li>منطق قوي، دقة، فهم الخوارزميات وواجهات البرمجة.</li>
+      <li>أساسيات Python/JS أو منصات بدون كود.</li>
+    </ul>
+    <p class="role-sub">المهام المطلوبة</p>
+    <ul class="role-list">
+      <li>بناء النموذج الأولي وربطه بالذكاء الاصطناعي.</li>
+      <li>اختبار الوظائف وإصلاح الأخطاء وتوثيق الكود.</li>
+    </ul>
+  </div>
+
+  <div class="role-card role-designer"> <!-- مصممة -->
+    <div class="role-title">المصممة</div>
+    <div class="role-badge">المسمّى المستقبلي: UI/UX Designer</div>
+    <p class="role-sub">الصفات والمهارات</p>
+    <ul class="role-list">
+      <li>ذوق بصري، بساطة، فهم تجربة المستخدم والألوان.</li>
+      <li>مهارة في Canva/Figma وأصول الهوية المرئية.</li>
+    </ul>
+    <p class="role-sub">المهام المطلوبة</p>
+    <ul class="role-list">
+      <li>تصميم الشعار والواجهات والموك أب.</li>
+      <li>تسليم دليل ألوان وخطوط وأيقونات قابلة للاستخدام.</li>
+    </ul>
+  </div>
+
+  <div class="role-card role-researcher"> <!-- باحثة -->
+    <div class="role-title">الباحثة</div>
+    <div class="role-badge">المسمّى المستقبلي: Research / Data Analyst</div>
+    <p class="role-sub">الصفات والمهارات</p>
+    <ul class="role-list">
+      <li>فضول علمي، تحليل مصادر، توثيق دقيق، أخلاقيات بيانات.</li>
+    </ul>
+    <p class="role-sub">المهام المطلوبة</p>
+    <ul class="role-list">
+      <li>تحليل المشكلة وجمع البيانات وإعداد المراجع.</li>
+      <li>صياغة فرضية الحل ومعايير التقييم.</li>
+    </ul>
+  </div>
+
+  <div class="role-card role-speaker"> <!-- متحدثة -->
+    <div class="role-title">المتحدثة</div>
+    <div class="role-badge">المسمّى المستقبلي: Presenter / Communications</div>
+    <p class="role-sub">الصفات والمهارات</p>
+    <ul class="role-list">
+      <li>ثقة، وضوح صوت، بناء قصة إقناعية، لغة جسد.</li>
+    </ul>
+    <p class="role-sub">المهام المطلوبة</p>
+    <ul class="role-list">
+      <li>إعداد سكربت العرض وتدريب الفريق على الإلقاء.</li>
+      <li>إدارة فقرة الأسئلة والأجوبة أمام الجمهور.</li>
+    </ul>
+  </div>
+
+  <div class="role-card role-media"> <!-- مسؤولة إعلامية -->
+    <div class="role-title">المسؤولة الإعلامية</div>
+    <div class="role-badge">المسمّى المستقبلي: Social Media / Content Specialist</div>
+    <p class="role-sub">الصفات والمهارات</p>
+    <ul class="role-list">
+      <li>كتابة محتوى، تصوير بسيط، تحرير سريع، إدارة قنوات.</li>
+    </ul>
+    <p class="role-sub">المهام المطلوبة</p>
+    <ul class="role-list">
+      <li>إنتاج بوسترات ومقاطع قصيرة توثّق العمل.</li>
+      <li>إدارة حساب المشروع ونشر أبرز اللقطات.</li>
+    </ul>
+  </div>
+
+  <div class="role-card role-tech"> <!-- منسقة تقنية -->
+    <div class="role-title">المنسقة التقنية</div>
+    <div class="role-badge">المسمّى المستقبلي: IT / Systems Coordinator</div>
+    <p class="role-sub">الصفات والمهارات</p>
+    <ul class="role-list">
+      <li>حل مشكلات، تنظيم ملفات، فهم المنصات السحابية.</li>
+    </ul>
+    <p class="role-sub">المهام المطلوبة</p>
+    <ul class="role-list">
+      <li>تجهيز الأجهزة والروابط والعروض التفاعلية.</li>
+      <li>إعداد النسخ الاحتياطية وخطة الطوارئ.</li>
+    </ul>
+  </div>
+</div>
+
+</section>
+
   </section>
 
   <!-- TOOLS -->
-  <section id="tools">
-    <h2>الأدوات والمنصات المقترحة</h2>
-    <div class="tools-grid">
-      <div class="tool-card"><div class="tool-name">Google Teachable Machine</div><a class="tool-link" href="https://teachablemachine.withgoogle.com" target="_blank">teachablemachine.withgoogle.com</a><div class="tool-desc">تدريب نماذج تصنيف بدون برمجة.</div></div>
-      <div class="tool-card"><div class="tool-name">Microsoft Lobe</div><a class="tool-link" href="https://www.lobe.ai" target="_blank">lobe.ai</a><div class="tool-desc">تدريب رؤية حاسوبية بواجهة مرئية.</div></div>
-      <div class="tool-card"><div class="tool-name">IBM watsonx</div><a class="tool-link" href="https://www.ibm.com/watsonx" target="_blank">ibm.com/watsonx</a><div class="tool-desc">أدوات احترافية لبناء حلول ذكية.</div></div>
-      <div class="tool-card"><div class="tool-name">Dialogflow</div><a class="tool-link" href="https://dialogflow.cloud.google.com" target="_blank">dialogflow.cloud.google.com</a><div class="tool-desc">روبوتات محادثة باللغة الطبيعية.</div></div>
-      <div class="tool-card"><div class="tool-name">MIT App Inventor</div><a class="tool-link" href="https://appinventor.mit.edu" target="_blank">appinventor.mit.edu</a><div class="tool-desc">تطبيقات أندرويد تعليمية.</div></div>
-      <div class="tool-card"><div class="tool-name">Thunkable</div><a class="tool-link" href="https://thunkable.com" target="_blank">thunkable.com</a><div class="tool-desc">بناء تطبيقات متعددة الأنظمة.</div></div>
-      <div class="tool-card"><div class="tool-name">Canva Magic Studio</div><a class="tool-link" href="https://www.canva.com" target="_blank">canva.com</a><div class="tool-desc">تصميم مدعوم بالذكاء الاصطناعي.</div></div>
-      <div class="tool-card"><div class="tool-name">Gamma.app</div><a class="tool-link" href="https://gamma.app" target="_blank">gamma.app</a><div class="tool-desc">عروض تقديمية تفاعلية.</div></div>
+<section id="tools">
+  <h2>الأدوات والمنصات المقترحة</h2>
+  <p>هذه مجموعة من الأدوات والمنصات التي يمكن استخدامها لتصميم نماذج أولية، روبوتات محادثة، تطبيقات بسيطة، وعروض تفاعلية لمشاريع الذكاء الاصطناعي.</p>
+
+  <div class="tools-grid">
+    <div class="tool-card">
+      <div class="tool-name">Google Teachable Machine</div>
+      <a class="tool-link" href="https://teachablemachine.withgoogle.com" target="_blank">teachablemachine.withgoogle.com</a>
+      <div class="tool-desc">تدريب نماذج تصنيف بدون برمجة.</div>
     </div>
+
+    <div class="tool-card">
+      <div class="tool-name">Microsoft Lobe</div>
+      <a class="tool-link" href="https://www.lobe.ai" target="_blank">lobe.ai</a>
+      <div class="tool-desc">تدريب رؤية حاسوبية بواجهة مرئية.</div>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-name">IBM watsonx</div>
+      <a class="tool-link" href="https://www.ibm.com/watsonx" target="_blank">ibm.com/watsonx</a>
+      <div class="tool-desc">أدوات احترافية لبناء حلول ذكية.</div>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-name">Dialogflow</div>
+      <a class="tool-link" href="https://dialogflow.cloud.google.com" target="_blank">dialogflow.cloud.google.com</a>
+      <div class="tool-desc">روبوتات محادثة باللغة الطبيعية.</div>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-name">MIT App Inventor</div>
+      <a class="tool-link" href="https://appinventor.mit.edu" target="_blank">appinventor.mit.edu</a>
+      <div class="tool-desc">تطبيقات أندرويد تعليمية.</div>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-name">Thunkable</div>
+      <a class="tool-link" href="https://thunkable.com" target="_blank">thunkable.com</a>
+      <div class="tool-desc">بناء تطبيقات متعددة الأنظمة.</div>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-name">Canva Magic Studio</div>
+      <a class="tool-link" href="https://www.canva.com" target="_blank">canva.com</a>
+      <div class="tool-desc">تصميم مدعوم بالذكاء الاصطناعي.</div>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-name">Gamma.app</div>
+      <a class="tool-link" href="https://gamma.app" target="_blank">gamma.app</a>
+      <div class="tool-desc">عروض تقديمية تفاعلية.</div>
+    </div>
+  </div>
+</section>
+
   </section>
 
   <!-- SCHEDULE -->
@@ -329,8 +593,7 @@
   <section id="conclusion">
     <h2>الخاتمة</h2>
     <div class="card">
-      يأتي معرض «ذكاء المستقبل: من فكرة إلى خوارزمية» امتدادًا لجهود الثانوية 124 في دعم التحول الرقمي وتعزيز الكفاءات الوطنية في مجال الذكاء الاصطناعي.
-    </div>
+يأتي معرض «ذكاء المستقبل: من فكرة إلى خوارزمية» امتدادًا لجهود الثانوية 124 في دعم التحول الرقمي وتعزيز الكفاءات الوطنية في مجال الذكاء الاصطناعي. ما تقدمه طالبات الصف الأول الثانوي من مشاريع ابتكارية واقعية يمثّل خطوة عملية نحو جيل واعٍ تقنيًا، قادر على التفكير الخوارزمي، والابتكار المسؤول، والمساهمة الفاعلة في صناعة مستقبل المملكة الذكي.    </div>
   </section>
 
   <footer>الثانوية 124 – إشراف المعلمة مشاعل الخليفة © 2025</footer>
